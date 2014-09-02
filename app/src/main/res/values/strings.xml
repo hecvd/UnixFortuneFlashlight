@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Fortune Flashlight</string>
+    <string name="app_name">Unix Fortune Flashlight</string>
     <string name="switch_text">Flashlight</string>
     <string name="new_fortune_text">New fortune</string>
-    <string name="title_activity_main">Fortune Flashlight</string>
+    <string name="title_activity_main">Unix Fortune Flashlight</string>
     <string name="action_settings">Settings</string>
 
 </resources>
