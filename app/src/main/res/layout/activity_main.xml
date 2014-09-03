@@ -20,9 +20,11 @@
         android:text="@string/switch_text" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="top"
+        android:singleLine="false"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/tvFortuneDisp"
         android:layout_below="@+id/swFlashlight"
         android:layout_alignParentLeft="true"
@@ -31,15 +33,15 @@
         android:layout_alignParentEnd="true"
         android:textColor="#fff"
         android:textIsSelectable="true"
-        android:typeface="monospace"
         android:layout_marginTop="30dp"
-        android:layout_above="@+id/button" />
+        android:layout_above="@+id/btnNewFortune"
+        />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_fortune_text"
-        android:id="@+id/button"
+        android:id="@+id/btnNewFortune"
         android:textColor="#fff"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

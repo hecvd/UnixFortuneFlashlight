@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.hecvd.fortuneflashlight.camera.FlashlightHandler;
 import com.hecvd.fortuneflashlight.fortunes.FortuneHandler;
@@ -15,6 +18,7 @@ public class MainActivity extends Activity {
 
 	FlashlightHandler flashlightHandler;
 	FortuneHandler fortuneHandler;
+	TextView tvFortuneDisp = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +26,21 @@ public class MainActivity extends Activity {
        setContentView(R.layout.activity_main);
 	    flashlightHandler = new FlashlightHandler(this);
 	    fortuneHandler = new FortuneHandler(this);
+	    tvFortuneDisp = ((TextView)findViewById(R.id.tvFortuneDisp));
 	    ((Switch)findViewById(R.id.swFlashlight)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 		    @Override
 		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			    flashlightHandler.toggleLight();
 		    }
 	    });
-
+	    ((Button)findViewById(R.id.btnNewFortune)).setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    tvFortuneDisp .setText(fortuneHandler.getRandomFortune());
+		    }
+	    });
+	    tvFortuneDisp.setText(fortuneHandler.getRandomFortune());
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

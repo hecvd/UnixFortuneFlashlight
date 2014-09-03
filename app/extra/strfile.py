@@ -18,10 +18,9 @@ def build_fortune_data_file(fpath):
 		fortune = []
 		for line in pfortune:
 			if line == '%\n':
-				lenght = len(" ".join(fortune))
-#				print "".join(fortune)
+				lenght = len("".join(fortune))
 				data += [(pos, lenght)]
-				pos += lenght + 2
+				pos += lenght + len(line)
 				shortest = min(shortest, lenght)
 				longest = max(longest, lenght)
 				fortune = []

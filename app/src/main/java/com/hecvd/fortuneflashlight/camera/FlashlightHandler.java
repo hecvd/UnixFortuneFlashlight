@@ -4,6 +4,7 @@ import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -16,7 +17,6 @@ public class FlashlightHandler {
 
 	public FlashlightHandler(Context context) {
 		this.context = context;
-		getCamera();
 	}
 
 	private void getCamera() {
@@ -25,33 +25,49 @@ public class FlashlightHandler {
 		       camera = Camera.open();
 		   } catch (RuntimeException e) {
 		       Log.e(TAG, "Camera.open() failed: " + e.getMessage());
+			   Toast.makeText(this.context,"Camera.open() failed: " + e.getMessage(),Toast.LENGTH_LONG).show();
 		   }
 		}
 	}
 
+	private void releaseCamera() {
+		if (camera != null) {
+			try {
+				camera.release();
+			} catch (RuntimeException e) {
+				Log.e(TAG, "Camera.release() failed: " + e.getMessage());
+				Toast.makeText(this.context,"Camera.release() failed: " + e.getMessage(),Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+
 	public void toggleLight() {
+		getCamera();
+		privateToggleLight();
+		releaseCamera();
+	}
+
+	private void privateToggleLight() {
 		if (camera == null)
 			return;
 		Parameters parameters = camera.getParameters();
-		if (parameters == null) {
-			Log.e(TAG, "Camera.getParameters() failed: null");
-			return;
-		}
 		List<String> flashModes = parameters.getSupportedFlashModes();
 		if (flashModes == null) {
 			Log.e(TAG, "parameters.getSupportedFlashModes() failed: null");
+			Toast.makeText(this.context,"parameters.getSupportedFlashModes() failed: null",Toast.LENGTH_LONG).show();
 			return;
 		}
 		String flashMode = parameters.getFlashMode();
 		Log.i(TAG, "Flash mode: " + flashMode);
 		Log.i(TAG, "Flash modes: " + flashModes);
+		//Toast.makeText(this.context,"Flash modes: " + flashModes,Toast.LENGTH_LONG).show();
 		if (Parameters.FLASH_MODE_OFF.equals(flashMode)){
 			if (flashModes.contains(Parameters.FLASH_MODE_TORCH)) {
 				parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
 				camera.setParameters(parameters);
 			}else{
+				Toast.makeText(this.context,"FLASH_MODE_TORCH not supported",Toast.LENGTH_LONG).show();
 				Log.e(TAG, "FLASH_MODE_TORCH not supported");
-				return;
 			}
 		} else {
 			if (flashModes.contains(Parameters.FLASH_MODE_OFF)) {
@@ -59,8 +75,9 @@ public class FlashlightHandler {
 				camera.setParameters(parameters);
 			}else{
 				Log.e(TAG, "FLASH_MODE_OFF not supported");
-				return;
+				Toast.makeText(this.context,"FLASH_MODE_OFF not supported",Toast.LENGTH_LONG).show();
 			}
 		}
 	}
+
 }
