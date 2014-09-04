@@ -33,6 +33,7 @@ def build_fortune_data_file(fpath):
 	
 
 for file in argv:
-	if not file.endswith('.dat'):
-		build_fortune_data_file(file)
+	if file.endswith('.dat') or file.endswith('.py'):
+		continue
+	build_fortune_data_file(file)
 
