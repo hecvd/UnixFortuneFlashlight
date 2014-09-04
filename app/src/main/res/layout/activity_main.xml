@@ -19,20 +19,16 @@
         android:textColor="#fff"
         android:text="@string/switch_text" />
 
-    <TextView
+    <TextSwitcher
         android:layout_width="fill_parent"
-        android:gravity="top"
-        android:singleLine="false"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="top"
         android:id="@+id/tvFortuneDisp"
         android:layout_below="@+id/swFlashlight"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textColor="#fff"
-        android:textIsSelectable="true"
         android:layout_marginTop="30dp"
         android:layout_above="@+id/btnNewFortune"
         />

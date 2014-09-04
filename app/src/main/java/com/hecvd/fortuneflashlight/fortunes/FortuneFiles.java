@@ -13,9 +13,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by hecvd on 3/09/14.
- */
+
 public class FortuneFiles {
 
 	private static final String TAG = FortuneFiles.class.getSimpleName();
@@ -45,10 +43,14 @@ public class FortuneFiles {
 	}
 
 	public String getRandomFortune(){
-		int max = this.files.size()-1, max1=0, min=0, min1=0;
-		FortuneFile fl = files.get(rn.nextInt(max - min + 1)+min);
-		max1 = fl.getIndexes().size()-1;
-		return fl.getFortune(this.context, rn.nextInt(max1 - min1 + 1)+min1);
+		int max = this.files.size()-1, min=0;
+		FortuneFile fl = files.get(rn.nextInt(max - min + 1) + min);
+//		for(FortuneFile f : files){
+//			if(f.getFortuneFile().contains("linux"))
+//			fl = f;
+//		}
+		max = fl.getIndexes().size()-1;
+		return fl.getFortune(this.context, rn.nextInt(max - min + 1) + min);
 	}
 
 	private static class FortuneFile {
@@ -62,17 +64,21 @@ public class FortuneFiles {
 
 		}
 
-		public FortuneFile(String fortuneFile, int fortuneCount, int shortestFortune, int longestFortune, ArrayList<int[]> indexes) {
-			this.fortuneFile = fortuneFile;
-			this.fortuneCount = fortuneCount;
-			this.longestFortune = longestFortune;
-			this.shortestFortune = shortestFortune;
-			this.indexes.addAll(indexes);
-		}
+//		public FortuneFile(String fortuneFile, int fortuneCount, int shortestFortune, int longestFortune, ArrayList<int[]> indexes) {
+//			this.fortuneFile = fortuneFile;
+//			this.fortuneCount = fortuneCount;
+//			this.longestFortune = longestFortune;
+//			this.shortestFortune = shortestFortune;
+//			this.indexes.addAll(indexes);
+//		}
 
 		public void setFortuneFile(String file) {
 			this.fortuneFile = file;
 		}
+
+//		public String getFortuneFile() {
+//			return fortuneFile;
+//		}
 
 		public void setFortuneCount(int fortuneCount) {
 			this.fortuneCount = fortuneCount;
